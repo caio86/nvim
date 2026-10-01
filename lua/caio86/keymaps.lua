@@ -62,3 +62,6 @@ map("x", "<leader>p", [["_dP]], "Paste without yanking selection")
 -- Leave terminal mode easily
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], "Exit terminal mode")
 
+-- Lazy plugin manager
+map("n", "<leader>L", "<cmd>Lazy<cr>", "Open Lazy plugin manager")
+
