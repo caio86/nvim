@@ -11,6 +11,8 @@ opt.wrap = false
 opt.splitright = true
 opt.splitbelow = true
 
+opt.showmode = false -- lualine already shows mode
+
 -- Indentation
 opt.shiftwidth = 4
 opt.tabstop = 4

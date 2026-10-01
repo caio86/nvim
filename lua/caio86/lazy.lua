@@ -23,7 +23,7 @@ require("lazy").setup({
     { import = "plugins" },
   },
   rocks = { enabled = false },
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "tokyonight", "habamax" } },
   -- no automatic update checks
   checker = { enabled = false },
   -- no popup when config files change
