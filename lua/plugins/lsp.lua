@@ -23,6 +23,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "saghen/blink.cmp",
       { "mason-org/mason.nvim", cond = not is_nixos, opts = { } },
       {
         "mason-org/mason-lspconfig.nvim",
@@ -40,6 +41,11 @@ return {
         update_in_insert = false,
         virtual_text = { spacing = 2 },
         float = { border = "rounded", source = true },
+      })
+
+      -- blink.cmp
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
 
       -- Per server settings
