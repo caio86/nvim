@@ -5,11 +5,6 @@ end
 -- Clear search highlight
 map({"i", "n"}, "<Esc>", "<cmd>nohlsearch<cr><esc>", "Clear search highlight")
 
--- If oil is not installed, use Netrw
-if vim.fn.exists(":Oil") == 0 then
-  map("n", "<leader>e", vim.cmd.Ex, "File Explorer")
-end
-
 -- Window navigation
 map("n", "<C-h>", "<C-w>h", "Go to left window")
 map("n", "<C-j>", "<C-w>j", "Go to lower window")
