@@ -61,3 +61,9 @@ autocmd("FileType", {
     vim.opt_local.tabstop = 4
   end,
 })
+
+vim.filetype.add({
+  extension = { p4 = "p4" },
+})
+vim.treesitter.language.register("cpp", "p4")
+
