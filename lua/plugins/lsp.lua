@@ -8,7 +8,10 @@ local servers = {
   clangd = "clangd",
   yamlls = "yaml-language-server",
   terraformls = "terraform-ls",
+  nil_ls = "nil",
 }
+
+local not_in_mason = { nil_ls = true }
 
 return {
   {
@@ -24,12 +27,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "saghen/blink.cmp",
-      { "mason-org/mason.nvim", cond = not is_nixos, opts = { } },
+      { "mason-org/mason.nvim", cond = not is_nixos, opts = {} },
       {
         "mason-org/mason-lspconfig.nvim",
         cond = not is_nixos,
         opts = {
-          ensure_installed = vim.tbl_keys(servers),
+          ensure_installed = vim.tbl_filter(function(s)
+            return not not_in_mason[s]
+          end, vim.tbl_keys(servers)),
           automatic_enable = false,
         },
       },
@@ -63,6 +68,10 @@ return {
         },
       })
 
+      vim.lsp.config("nil_ls", {
+        settings = { ["nil"] = { formatting = { command = { "nixfmt" } } } },
+      })
+
       vim.lsp.config("clangd", {
         cmd = { "clangd", "--background-index", "--clang-tidy", "--completion-style=detailed" },
       })
@@ -90,7 +99,11 @@ return {
           bmap("gD", vim.lsp.buf.declaration, "Go to declaration")
           bmap("<leader>d", vim.diagnostic.open_float, "Line diagnostics")
           bmap("<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols")
-          bmap("<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols")
+          bmap(
+            "<leader>fS",
+            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            "Workspace symbols"
+          )
 
           if client and client:supports_method("textDocument/inlayHint") then
             bmap("<leader>ch", function()
@@ -101,14 +114,12 @@ return {
         end,
       })
 
-
       -- Enable only manually defined lsp servers that have exe installed
       for server, exe in pairs(servers) do
-         if vim.fn.executable(exe) == 1 then
+        if vim.fn.executable(exe) == 1 then
           vim.lsp.enable(server)
         end
       end
-    end
+    end,
   },
 }
-

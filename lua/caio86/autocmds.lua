@@ -4,7 +4,9 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Highlight yanked text briefly
 autocmd("TextYankPost", {
   group = augroup,
-  callback = function() vim.hl.on_yank() end,
+  callback = function()
+    vim.hl.on_yank()
+  end,
 })
 
 -- Remove spaces after last word on each line
@@ -41,9 +43,20 @@ autocmd("VimResized", {
 autocmd("FileType", {
   group = augroup,
   pattern = {
-    "yaml", "json", "jsonc", "lua", "html", "css", "scss",
-    "javascript", "javascriptreact", "typescript", "typescriptreact",
-    "terraform", "hcl",
+    "yaml",
+    "json",
+    "jsonc",
+    "lua",
+    "html",
+    "css",
+    "scss",
+    "nix",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "terraform",
+    "hcl",
   },
   callback = function()
     vim.opt_local.shiftwidth = 2
@@ -66,4 +79,3 @@ vim.filetype.add({
   extension = { p4 = "p4" },
 })
 vim.treesitter.language.register("cpp", "p4")
-
