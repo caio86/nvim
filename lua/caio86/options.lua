@@ -34,4 +34,3 @@ opt.updatetime = 250
 opt.timeoutlen = 400
 opt.mouse = "a"
 opt.confirm = true
-
