@@ -75,6 +75,7 @@ autocmd("FileType", {
   end,
 })
 
+-- P4
 vim.filetype.add({
   extension = { p4 = "p4" },
 })
