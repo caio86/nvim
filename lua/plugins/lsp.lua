@@ -9,6 +9,7 @@ local servers = {
   yamlls = "yaml-language-server",
   terraformls = "terraform-ls",
   nil_ls = "nil",
+  gopls = "gopls",
 }
 
 local not_in_mason = { nil_ls = true }
@@ -78,6 +79,16 @@ return {
 
       vim.lsp.config("yamlls", {
         settings = { yaml = { keyOrdering = false } },
+      })
+
+      vim.lsp.config("gopls", {
+        settings = {
+          gopls = {
+            analyses = { unusedparams = true },
+            staticcheck = true,
+            usePlaceholders = true,
+          },
+        },
       })
 
       -- Buffer-local setup when a server attaches

@@ -20,6 +20,7 @@ return {
       lua = { "stylua" },
       terraform = { "terraform_fmt" },
       nix = { "nixfmt" },
+      go = { "goimports" },
     },
 
     -- If no formatter is configured for a filetype, use the LSP's formatter
