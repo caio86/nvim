@@ -8,7 +8,7 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       -- Mason package names (not LSP names)
-      ensure_installed = { "clang-format", "stylua", "shfmt", "tflint", "goimports" },
+      ensure_installed = { "clang-format", "stylua", "shfmt", "tflint", "goimports", "prettier" },
     },
   },
 }

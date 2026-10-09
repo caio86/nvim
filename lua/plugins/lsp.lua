@@ -10,6 +10,11 @@ local servers = {
   terraformls = "terraform-ls",
   nil_ls = "nil",
   gopls = "gopls",
+  vtsls = "vtsls",
+  html = "vscode-html-language-server",
+  cssls = "vscode-css-language-server",
+  eslint = "vscode-eslint-language-server",
+  jsonls = "vscode-json-language-server",
 }
 
 local not_in_mason = { nil_ls = true }
@@ -47,6 +52,10 @@ return {
         update_in_insert = false,
         virtual_text = { spacing = 2 },
         float = { border = "rounded", source = true },
+      })
+
+      vim.lsp.config("vtsls", {
+        settings = { vtsls = { autoUseWorkspaceTsdk = true } },
       })
 
       -- blink.cmp
@@ -115,6 +124,12 @@ return {
             "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
             "Workspace symbols"
           )
+          bmap("<leader>co", function()
+            vim.lsp.buf.code_action({
+              context = { only = { "source.organizeImports" }, diagnostics = {} },
+              apply = true,
+            })
+          end, "Organize imports")
 
           if client and client:supports_method("textDocument/inlayHint") then
             bmap("<leader>ch", function()
